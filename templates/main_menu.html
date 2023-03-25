@@ -1,0 +1,77 @@
+{% load template_tags %}
+<div id="side_ba" class="side_ba">
+{% for i in menu %}
+    {% if i.has_children %}
+    <div id="{{ i.slug }}" class="side_bar" onclick="fn(event)">{{ i.name }}</div>
+    {% while_tag i %}
+    {% else %}
+        <div id={i.slug} class="endppoint"><a href="{% url "menu:navigate" i.slug %}">{{ i.name }}</a></div>
+    {% endif %}
+{% endfor %}
+</div>
+
+<script>
+    function fn(target){
+
+        if (document.getElementById(`this_${target.target.id}`).hidden === true){
+        document.getElementById(`this_${target.target.id}`).hidden = false
+        document.getElementById(`${target.target.id}`).classList.add('active_menu')
+        document.getElementById(`${target.target.id}`).classList.toggle('sidebar')
+        }
+        else{
+            document.getElementById(`this_${target.target.id}`).hidden = true
+            document.getElementById(`this_${target.target.id}`).hidden = true
+            document.getElementById(`${target.target.id}`).classList.toggle('active_menu')
+            document.getElementById(`${target.target.id}`).classList.toggle('sidebar')
+
+        }
+    }
+</script>
+
+<style>
+.side_bar{
+    background-color: cadetblue;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    color: white;
+    font-size: 26px;
+}
+.within{
+    background-color: burlywood;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    color: white;
+    font-size: 26px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.endppoint{
+    background-color: coral;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 30px;
+    color: white;
+    font-size: 26px;
+    margin-left: -20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.p{
+    margin: 0px;
+    padding: 0px;
+}
+.active_menu{
+    padding-top: 5px;
+    padding-bottom: 0px;
+    padding-left: 10px;
+    color: white;
+    font-size: 26px;
+    background-color: #82a9f2;
+}
+body{
+    margin: 0px;
+}
+</style>
